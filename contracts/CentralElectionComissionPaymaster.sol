@@ -41,11 +41,14 @@ contract CentralElectionComissionPaymaster is Initializable, IPaymaster {
         UserOperation calldata userOp,
         bytes32 userOpHash, 
         uint256 maxCost
-    ) internal returns (bytes memory context, uint256 validationData) {
-        senderNonce[userOp.sender]++;
-        //userOp.paymasterAndData;
-       
-        return ("", _packValidationData(false, 0, 0));
+    ) internal returns (bytes memory context, uint256 validationData) { 
+        // only CentralElectionComissionAA or VoterAA
+        if( userOp.sender == address(centralElectionComissionAA) || 
+            centralElectionComissionAA.isVoterAAListed(userOp.sender)) {
+            senderNonce[userOp.sender]++;
+            return ("", _packValidationData(false, 0, 0));
+        }
+        return ("", _packValidationData(true, 0, 0));// another account abstraction
     }
 
     /// @inheritdoc IPaymaster

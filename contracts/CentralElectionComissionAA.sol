@@ -278,7 +278,7 @@ contract CentralElectionComissionAA is BaseAccount, TokenCallbackHandler, Initia
         return r;
     }
 
-    function isListedVoterAA(address voterAA) public view returns(bool) {
+    function isVoterAAListed(address voterAA) public view returns(bool) {
         return voterAAFactory.isVoterAAListed(voterAA);
     }
 

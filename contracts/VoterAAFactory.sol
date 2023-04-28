@@ -61,7 +61,11 @@ contract VoterAAFactory is Initializable {
     }
 
     function isVoterAAListed(address voterAA) public view returns(bool) {
-        return address(voterAAs[voterAAids[voterAA]]) == voterAA;
+        if(voterAAs.length == 0) {
+            return false;
+        } else {
+            return address(voterAAs[voterAAids[voterAA]]) == voterAA;
+        }
     }
 
 

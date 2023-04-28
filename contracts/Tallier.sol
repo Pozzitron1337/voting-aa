@@ -52,7 +52,7 @@ contract Tallier is Initializable {
      * @param candidateId id of candidate in array `candidates`
      */
     function submitVote(uint256 candidateId) public {
-        centralElectionComissionAA.isListedVoterAA(msg.sender);
+        centralElectionComissionAA.isVoterAAListed(msg.sender);
         require(candidateId < getCandidatesLength(), "Tallier: invalid candidateId");
         votes[candidateId]++;
         totalVotes++;
